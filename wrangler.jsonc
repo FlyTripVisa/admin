@@ -1,30 +1,16 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "admin",
-  "compatibility_date": "2026-07-03",
-  "observability": {
-    "enabled": true
-  },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-11",
   "ai": {
     "binding": "AI"
   },
-  "durable_objects": {
-    "bindings": [
-      {
-        "class_name": "admin",
-        "name": "AI"
-      }
-    ]
-  },
-  "migrations": [
+  "d1_databases": [
     {
-      "new_sqlite_classes": [
-        "flytrip_db"
-      ],
-      "tag": "v1"
+      "binding": "flydb_d1",
+      "database_name": "flytripvisa-db",
+      "database_id": "YOUR_DATABASE_ID_HERE"
     }
   ]
 }
