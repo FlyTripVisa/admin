@@ -5,10 +5,26 @@
   "observability": {
     "enabled": true
   },
-  "assets": {
-    "not_found_handling": "single-page-application"
-  },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "class_name": "admin",
+        "name": "AI"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "new_sqlite_classes": [
+        "flytrip_db"
+      ],
+      "tag": "v1"
+    }
   ]
 }
