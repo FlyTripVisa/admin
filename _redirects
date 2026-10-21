@@ -1,0 +1,16 @@
+# =========================================================
+# Cloudflare Pages Redirects & Clean URLs
+# https://developers.cloudflare.com/pages/platform/redirects/
+# =========================================================
+
+# Clean URLs (drop .html extension)
+/login           /login.html       301
+/signup          /signup.html      301
+/dashboard       /dashboard.html   301
+/admin           /dashboard.html   301
+
+# API routes (future Workers integration)
+# /api/*          /api/index.js     200
+
+# SPA fallback (if using client-side routing)
+# /*             /index.html       200

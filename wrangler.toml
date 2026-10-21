@@ -1,0 +1,28 @@
+# =========================================================
+# Cloudflare Pages / Workers Configuration
+# Zero-config static deployment — just connect your repo
+# and set the build output directory to the root.
+# =========================================================
+
+name = "flytripvisa-admin"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "./"
+
+# Environment variables (set in Cloudflare Dashboard > Settings > Environment variables)
+# NODE_VERSION = "20"
+
+# Headers for security & performance (applied by Cloudflare Pages)
+[env.production]
+name = "flytripvisa-admin"
+
+# SPA / static asset routes
+[[env.production.routes]]
+pattern = "/*"
+custom_domain = "admin.flytripvisa.site"
+
+# Redirects (Cloudflare Pages _redirects format)
+# These are also covered by the _redirects file for zero-config deploys.
+# [[redirects]]
+#   from = "/login"
+#   to = "/login.html"
+#   status = 301

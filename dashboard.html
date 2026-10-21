@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="https://flytripvisa.site/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>FlyTripVisa Admin · Dashboard</title>
+  <meta name="description" content="FlyTripVisa Admin Dashboard – Manage visa applications, users, analytics & settings.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="bg-layer"></div>
+  <div class="bg-grid"></div>
+
+  <!-- ==================== TOPBAR ==================== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="topbar-brand">
+        <img src="https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/flytripvisa-logo1.png" alt="FlyTripVisa">
+        <span>Admin</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn" onclick="window.FTV && window.FTV.toast('Notifications coming soon.')" aria-label="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="badge">3</span>
+      </button>
+      <button class="topbar-btn" onclick="window.FTV && window.FTV.Dashboard && window.FTV.Dashboard.refresh && window.FTV.Dashboard.refresh()" aria-label="Refresh">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+      <div class="avatar" id="user-avatar" title="Account">?</div>
+    </div>
+  </header>
+
+  <!-- ==================== SIDEBAR OVERLAY ==================== -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/flytripvisa-logo1.png" alt="FlyTripVisa">
+      <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="avatar" id="sidebar-avatar">?</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebar-name">—</div>
+        <div class="user-role" id="sidebar-role">admin</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Main</div>
+      <button class="nav-item active" data-section="overview">
+        <i class="fas fa-gauge-high"></i> Overview
+      </button>
+      <button class="nav-item" data-section="applications">
+        <i class="fas fa-passport"></i> Applications
+      </button>
+      <button class="nav-item" data-section="users">
+        <i class="fas fa-users"></i> Users
+      </button>
+
+      <div class="nav-label">Insights</div>
+      <button class="nav-item" data-section="analytics">
+        <i class="fas fa-chart-line"></i> Analytics
+      </button>
+
+      <div class="nav-label">System</div>
+      <button class="nav-item" data-section="settings">
+        <i class="fas fa-gear"></i> Settings
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="nav-item" id="logout-btn" style="color:#ff8888;">
+        <i class="fas fa-right-from-bracket"></i> Logout
+      </button>
+      <div style="text-align:center;font-size:10px;color:var(--text-muted);margin-top:10px;">
+        FlyTripVisa Admin v1.0
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title" id="page-title">
+        <i class="fas fa-gauge-high text-brand"></i> Dashboard Overview
+      </h1>
+      <p class="page-sub" id="page-sub">Welcome back! Here's what's happening today.</p>
+    </div>
+
+    <!-- ==================== OVERVIEW ==================== -->
+    <section class="content-section active" id="section-overview">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-file-lines"></i></div>
+          <div class="metric-value" id="metric-total">—</div>
+          <div class="metric-label">Total Applications</div>
+          <div class="metric-change up"><i class="fas fa-arrow-up"></i> +12.4% this week</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-circle-check"></i></div>
+          <div class="metric-value" id="metric-approved">—</div>
+          <div class="metric-label">Approved</div>
+          <div class="metric-change up"><i class="fas fa-arrow-up"></i> +8.1% this week</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-clock"></i></div>
+          <div class="metric-value" id="metric-pending">—</div>
+          <div class="metric-label">Pending Review</div>
+          <div class="metric-change down"><i class="fas fa-arrow-down"></i> -3.2% this week</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-sack-dollar"></i></div>
+          <div class="metric-value" id="metric-revenue">—</div>
+          <div class="metric-label">Revenue (Approved)</div>
+          <div class="metric-change up"><i class="fas fa-arrow-up"></i> +15.7% this week</div>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <div class="card-head">
+          <h2 class="card-title"><i class="fas fa-list text-brand"></i> Recent Applications</h2>
+          <div class="card-actions">
+            <button class="btn btn-ghost" style="height:34px;width:auto;padding:0 14px;font-size:12px;" onclick="window.FTV && window.FTV.Dashboard && FTV.Dashboard.goToPage && (document.querySelector('.nav-item[data-section=applications]').click())">
+              View All
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Applicant</th>
+                <th>Country</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="recent-tbody">
+              <tr>
+                <td colspan="5">
+                  <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading recent applications...</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== APPLICATIONS ==================== -->
+    <section class="content-section" id="section-applications">
+      <div class="glass-card">
+        <div class="card-head">
+          <h2 class="card-title"><i class="fas fa-passport text-brand"></i> Visa Applications</h2>
+          <div class="card-actions">
+            <button class="btn btn-primary" style="height:34px;width:auto;padding:0 16px;font-size:12px;" onclick="window.FTV && window.FTV.toast('Export feature coming soon.')">
+              <i class="fas fa-download"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="search" id="app-search" placeholder="Search by name, reference, country or email...">
+          </div>
+          <select class="filter-select" id="filter-status">
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <select class="filter-select" id="filter-country">
+            <option value="all">All Countries</option>
+          </select>
+        </div>
+
+        <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;" id="filter-count"></div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Applicant</th>
+                <th>Country</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applications-tbody">
+              <tr>
+                <td colspan="8">
+                  <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading applications...</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <div id="pagination-info">—</div>
+          <div class="page-btns" id="page-btns"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== USERS ==================== -->
+    <section class="content-section" id="section-users">
+      <div class="glass-card">
+        <div class="card-head">
+          <h2 class="card-title"><i class="fas fa-users text-brand"></i> Admin Users</h2>
+          <div class="card-actions">
+            <button class="btn btn-primary" style="height:34px;width:auto;padding:0 16px;font-size:12px;" onclick="window.FTV && window.FTV.toast('Invite user feature coming soon.')">
+              <i class="fas fa-user-plus"></i> Invite
+            </button>
+          </div>
+        </div>
+        <div class="user-list" id="users-list">
+          <div class="empty-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading users...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ANALYTICS ==================== -->
+    <section class="content-section" id="section-analytics">
+      <div class="glass-card">
+        <div class="card-head">
+          <h2 class="card-title"><i class="fas fa-chart-line text-brand"></i> Approved Applications (Last 7 Days)</h2>
+        </div>
+        <div style="position:relative;height:280px;">
+          <canvas id="analytics-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="metrics-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-globe"></i></div>
+          <div class="metric-value" id="analytic-countries">—</div>
+          <div class="metric-label">Active Destinations</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-bolt"></i></div>
+          <div class="metric-value" id="analytic-avg">—</div>
+          <div class="metric-label">Avg. Processing (h)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SETTINGS ==================== -->
+    <section class="content-section" id="section-settings">
+      <div class="glass-card">
+        <div class="card-head">
+          <h2 class="card-title"><i class="fas fa-gear text-brand"></i> Account Settings</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:480px;">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" id="settings-username" disabled style="width:100%;height:44px;padding:0 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;color:var(--text-dim);">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="settings-email" disabled style="width:100%;height:44px;padding:0 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;color:var(--text-dim);">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Role</label>
+            <input type="text" id="settings-role" disabled style="width:100%;height:44px;padding:0 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;color:var(--text-dim);">
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-primary" style="width:auto;height:42px;padding:0 20px;" onclick="window.FTV && window.FTV.toast('Settings saved (demo).')">
+              Save Changes
+            </button>
+            <button class="btn btn-ghost" style="width:auto;height:42px;padding:0 20px;" onclick="if(window.FTV && window.FTV.Auth) { window.FTV.Auth.logout(); window.location.href='login.html'; }">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== APPLICATION DETAIL MODAL ==================== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-head">
+        <h3><i class="fas fa-file-lines text-brand"></i> Application Details</h3>
+        <button class="modal-close" id="modal-close" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" id="modal-cancel" style="height:38px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js (lightweight CDN, cached by Cloudflare) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/dashboard.js"></script>
+</body>
+</html>
